@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>ACNLP Api</title>
+        <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"> 
+        <link type="text/css" href="/stylesheets/api.css" rel="stylesheet">
+        <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <!-- 页眉 -->
+        <div class="head-wrap">
+            <div class="head">
+                <div class="head-brand"></div>
+                <ul class="nav head-nav">
+                    <li><a href="/">首页</a></li>
+                    <li class="active"><a href="#">文档</a></li>
+                    <li><a href="/demo">演示</a></li>
+                    <li><a href="/demovv">viva入口</a></li>
+                    <li><a href="http://autobot.acnlp.com:3000">AutoBot</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <div class="blog-header">
+                <h1 class="blog-title">ACNLP 接口文档</h1>
+                <p class="lead blog-description"></p>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-8 blog-main">
+                    <div class="blog-post">
+                        <h2>简介</h2>
+                        <p>ACNLP是一个用于解析中文自然语义的开放接口，提供分词、词性标记、关键词提取、语句情感分析等处理能力。</p>
+                        <br>
+                        <br>
+                        <h2>分词</h2>
+                        <ul>
+                            <li>精确分词</li>
+                            <li>类搜索引擎分词</li>
+                        </ul>
+                        <p>精确分词接口调用方式：</p>
+                        <pre><code>/exactCut/接口参数</code></pre>
+                        <p>例子</p>
+                        <pre><code>http://acnlp_server/exactCut/明天去清华大学洗澡</code></pre>
+                        <p>返回的Json对象中，键是wordsList，值是一个用逗号分割的字符串数组。</p>
+                        <pre><code>{"wordsList":["明天","去","清华大学","洗澡"]}</code></pre>
+                        <hr>
+                        <p>类搜索引擎分词接口调用方式：</p>
+                        <pre><code>/searchCut/接口参数</code></pre>
+                        <p>例子</p>
+                        <pre><code>http://acnlp_server/searchCut/明天去清华大学洗澡</code></pre>
+                        <p>返回的Json对象中，键是wordsList，值是一个用逗号分割的字符串数组。</p>
+                        <pre><code>{"wordsList":["明天","去","清华","华大","大学","清华大学","洗澡"]}</code></pre>
+                        <br>
+                        <br>
+                        <h2>词性标记</h2>
+                        <p>词性标记接口调用方式：</p>
+                        <pre><code>/wordFlag/接口参数</code></pre>
+                        <p>例子</p>
+                        <pre><code>http://acnlp_server/wordFlag/明天去清华大学洗澡</code></pre>
+                        <p>返回的Json对象中，键是flagsList，值是一个对象数组。</p>
+                        <p>数组中的对象包含两个属性，word是分词，flag是该词的词性。</p>
+                        <pre><code>{"flagsList":[{"word":"明天","flag":"t"},{"word":"去","flag":"v"},{"word":"清华大学","flag":"nt"},{"word":"洗澡","flag":"v"}]}</code></pre>
+                        <br>
+                        <br>
+                        <h2>关键词提取</h2>
+                        <p>关键词提取接口调用方式：</p>
+                        <pre><code>/kwAnalyse/接口参数</code></pre>
+                        <p>例子</p>
+                        <pre><code>http://acnlp_server/kwAnalyse/明天去清华大学洗澡</code></pre>
+                        <p>返回的Json对象中，键是rankList，值是一个对象数组。</p>
+                        <p>数组中的对象包含两个属性，word是分词，weight是该词在文章或句子中的权重。</p>
+                        <p>数组顺序按照weight值从高到低排序</p>
+                        <pre><code>{"rankList":[{"word":"洗澡","weight":"2.79844870535"},{"word":"清华大学","weight":"2.69353157387"},{"word":"明天","weight":"2.13951957614"}]}</code></pre>
+                        <br>
+                        <br>
+                        <h2>语句情感分析</h2>
+                        <p>语句情感分析接口调用方式：</p>
+                        <pre><code>/sentiments/接口参数</code></pre>
+                        <p>例子1</p>
+                        <pre><code>http://acnlp_server/sentiments/该商品有瑕疵，差评！</code></pre>
+                        <p>返回的Json对象中，键是sentiments，值是一个浮点数。</p>
+                        <pre><code>{"sentiments":"0.0495151055361"}</code></pre>
+                        <p>sentiments的取值范围从0~1，值越趋近于1，说明语句越正面。</p>
+                        <p>由于例子1中传入的参数带有明显的负面情感，所以sentiments分值很低</p>
+                        <hr>
+                        <p>例子2</p>
+                        <pre><code>http://acnlp_server/sentiments/该商品非常好！</code></pre>
+                        <pre><code>{"sentiments":"0.616971339786"}</code></pre>
+                        <p>例子2中传入的语句肯定了商品，所以sentiments分值超过了0.5这个分界点。</p>
+
+                        <br>
+                        <br>
+                        <h2>文章相似性分析</h2>
+                        <p>关键词提取接口调用方式：</p>
+                        <pre><code>/similar/接口参数</code></pre>
+                        <p>例子</p>
+                        <pre><code>http://acnlp_server/similar/明天去清华大学洗澡</code></pre>
+                        <p>返回的Json对象中，键是similarNO：代表文章序号和similarQZ：代表相似度分值</p>
+                        <p>数组顺序按照similarQZ值从高到低排序</p>
+                        <pre><code>{"similarNO":["29","109","102","75","62","11","111","69","28","61"],"similarQZ":["0.695885","0.430102","0.391375","0.222466","0.148898","0.0232539","0.0185407","0.0179958","0.0177973","0.0168597"]}</code></pre>
+                        <hr>
+                        <pre><code>/atc/similarNO文章序号</code></pre>
+                        <p>得到文章具体内容</p>
+                        <pre><code>/fileid/similarNO文章序号</code></pre>
+                        <p>得到文章真实id</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="blog-footer">
+            <p>ACNLP by 49 Team</p>
+            <p><a href="#">置顶</a></p>
+        </div>
+    </body>
+</html>

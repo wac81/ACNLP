@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACNLP Demo</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link type="text/css" href="/stylesheets/demo.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/javascripts/highcharts.js"></script>
+</head>
+
+<body>
+<!--页眉-->
+<div class="head-wrap">
+    <div class="head">
+        <div class="head-brand"></div>
+        <ul class="nav head-nav">
+            <li><a href="/">首页</a></li>
+            <li><a href="/api">文档</a></li>
+            <li><a href="/demo">演示</a></li>
+            <li class="active"><a href="#">viva入口</a></li>
+            <li><a href="http://autobot.acnlp.com:3000">AutoBot</a></li>
+        </ul>
+    </div>
+</div>
+<!--容器-->
+<div class="container">
+    <!--提交区-->
+    <div class="submit_area">
+        <textarea class="textarea"></textarea>
+        <div class="btn btn-primary submit_btn">提交</div>
+    </div>
+    <!--分析区-->
+    <div class="analysis">
+        <div class="analysis_nav">
+            <div class="l1">ACNLP解析结果</div>
+            <div class="l2 clicked">相似性</div>
+        </div>
+        <div class="analysis_result_border">
+            <div class="analysis_result"></div>
+        </div>
+    </div>
+</div>
+<!--页脚-->
+<div class="blog-footer">
+    <p>ACNLP by 49 Team</p>
+    <p><a href="#">置顶</a></p>
+</div>
+</body>
+<script>
+    $(document).ready(function() {
+
+        // 初始化页面
+        $('.textarea').val();
+
+        // 提交按钮点击事件
+        $('.submit_btn').click(function () {
+            var analysisResult = $('.analysis_result').text('');
+            var value = $('.textarea').val();
+            $.get('/similar/' + encodeURIComponent(value), similarResult);
+        });
+
+        // 相似性-回调
+        function similarResult(result) {
+            var analysisResult = $('.analysis_result');
+            //$('.check_similar').text('点击查看相似性');
+            for (var i = 0, k = result.similarNO.length; i < k; i+=1) {
+                var item = $('<div class="item"><span class="simiNO">' + parseInt(result.similarNO[i]) + '</span><span>' + result.similarQZ[i] + '</span></div>');
+                analysisResult.append(item);
+            }
+        };
+
+        // 相似文章展示
+        $('.analysis_result').on('click', '.item .simiNO', function () {
+            $.get('/atc/' + $(this).text(), function(data) {
+                alert(data.data);
+            });
+        });
+    });
+</script>
+</html>

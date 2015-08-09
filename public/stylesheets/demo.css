@@ -1,0 +1,268 @@
+/*
+ * Globals
+ */
+
+body {
+    color: rgb(89,89,89);
+    background-color: rgb(235,235,235);
+}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+    margin-top: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: normal;
+    color: #333;
+}
+
+
+/*
+ * Override Bootstrap's default container.
+ */
+
+@media (min-width: 1200px) {
+    .container {
+        width: 970px;
+    }
+}
+
+
+/*
+ * Header
+ */
+.head-wrap {
+    width: 100%;
+    background-color: #428bca;
+}
+
+.head {
+    width: 1100px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.head-brand {
+    width: 120px;
+    height: 46px;
+    margin: 4px 0 0 100px;
+    float: left;
+    background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+}
+
+.head-nav {
+    height: 100%;
+    margin-right: 100px;
+    float: right;
+}
+
+.head-nav > li {
+    height: 100%;
+    display: inline-block;
+    margin-left: 20px;
+}
+
+.head-nav > li > a {
+    padding: 0;
+    font-size: 14px;
+    color: #cdddeb;
+    outline: none;
+    position: relative;
+    display: inline-block;
+    height: 24px;
+    margin-top: 15px;
+}
+
+.head-nav > li > a:hover,
+.head-nav > li > a:focus {
+    color: #fff;
+    background-color: transparent;
+}
+
+.head-nav > .active > a {
+    color: #fff;
+}
+
+.head-nav > .active:after {
+    border-bottom: 7px solid #fff;
+    border-left: 9px solid transparent;
+    border-right: 9px solid transparent;
+    bottom: 0;
+    content: " ";
+    position: absolute;
+    margin-left: -22px;
+}
+/*
+ * Footer
+ */
+
+.blog-footer {
+/*    padding: 40px 0;*/
+    color: #999;
+    text-align: center;
+}
+.blog-footer p:last-child {
+    margin-bottom: 0;
+}
+
+/*
+ * analysis
+ */
+
+.submit_area {
+    height: 292px;
+    width: 940px;
+    margin: 20px 0 20px 0;
+    background-color: #fff;
+    float: left;
+    font-size: 18px;
+}
+
+.submit_area > textarea {
+    height: 180px;
+    line-height: 24px;
+    margin: 30px 0 0 30px;
+    width: 880px;
+    border-width: 0px;
+    outline-style: solid;
+    outline-color: rgb(152,215,253); 
+    resize: none;
+}
+
+.submit_area > .submit_btn,
+.submit_area > .danger_btn {
+    width: 90px;
+    height: 35px;
+    float: right;
+    margin: 30px 30px 0 0;
+}
+
+.analysis {
+    min-height: 440px;
+    width: 940px;
+    margin: 20px 0 20px 0;
+    background-color: #fff;
+    float: left;
+    font-size: 18px;
+}
+
+.analysis_nav {
+    width: 160px;
+    height: 100%;
+    float: left;
+    margin-top: 34px;
+}
+
+.analysis_nav .l1 {
+    width: 140px;
+    height: 35px;
+    line-height: 35px;
+    text-align: center;
+    color: #fff;
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: rgb(253,162,41);
+    float: right;
+}
+
+.analysis_nav .l2 {
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    color: rgb(109,109,109);
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    background-color: rgb(244,244,244);
+    float: right;
+    margin-top: 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.analysis_nav .clicked {
+    color: #fff;
+    background-color: rgb(70,179,248);
+}
+
+.analysis_result_border {
+    width: 750px;
+    min-height: 360px;
+    float: left;
+    border: 1px solid rgb(223,223,223);
+    margin-top: 34px;
+    margin-bottom: 34px;
+}
+
+.analysis_result {
+    width: 92%;
+    margin: 20px 0 20px 4%;
+    min-height: 340px;
+    float: left;
+    font-size: 18px;
+}
+
+.analysis_result .itemS {
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.analysis_result .itemS .span1 {
+    width: 50%;
+    height: 100%;
+    float: left;
+    color: #357ebd;
+}
+
+.analysis_result .itemS .span2 {
+    width: 50%;
+    height: 100%;
+    float: left;
+    color: #c9302c;
+}
+
+.analysis_result .item {
+    color: rgb(109,109,109);
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.analysis_result .item span {
+    color: rgb(85,85,85);
+    width: 50%;
+    height: 100%;
+    float: left;
+}
+
+.analysis_result .check_similar {
+    width: 300px;
+    height: 30px;
+    line-height: 30px;
+    float: left;
+    color: #d58512;
+    cursor: pointer;
+}
+
+.analysis_result .simiNO {
+    cursor: pointer;
+}
+
+
+
+
+
+
+

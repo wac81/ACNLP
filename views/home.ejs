@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ACNLP</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link type="text/css" href="/stylesheets/home.css" rel="stylesheet">
+    <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 页眉 -->
+    <div class="head-wrap">
+        <div class="head">
+            <div class="head-brand"></div>
+            <ul class="nav head-nav">
+                <li class="active"><a href="#">首页</a></li>
+                <li><a href="/api">文档</a></li>
+                <li><a href="/demo">演示</a></li>
+                <li><a href="/demovv">viva入口</a></li>
+                <li><a href="http://autobot.acnlp.com:3000">AutoBot</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!--中部-->
+    <div class="content">
+        <div class="middle">
+            <input type="text" class="parseInput form-control" placeholder="说点什么吧">
+            <div class="parseSubmit btn btn-primary">解析</div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="foot">
+        <p>ACNLP by 49 Team</p>
+    </div>
+</body>
+<script>
+    $(document).ready(function() {
+        $('.parseInput').val('');
+        $('.parseInput').focus();
+        $('.parseInput').keydown(function(event) {
+            if(event.keyCode == 13) {
+                location.href = '/demo' // /' + $(this).val();
+                $(this).val('');
+            }
+        });
+        $('.parseSubmit').click(function () {
+            var input = $('.parseInput').val();
+            location.href = '/demo' // /' + input;
+            $(this).val('');
+        });
+    });
+</script>
+</html>
