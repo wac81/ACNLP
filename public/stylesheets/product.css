@@ -3,8 +3,8 @@
  */
 
 body {
-    color: #555;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: rgb(89,89,89);
+	height: 100%;
 }
 
 h1, .h1,
@@ -21,23 +21,16 @@ h6, .h6 {
 
 
 /*
- * Blog name and description
+ * Override Bootstrap's default container.
  */
 
-.blog-header {
-  padding-top: 20px;
-  padding-bottom: 20px;
+@media (min-width: 1200px) {
+    .container {
+        width: 980px;
+        padding: 0;
+    }
 }
-.blog-title {
-  margin-top: 30px;
-  margin-bottom: 0;
-  font-size: 60px;
-  font-weight: normal;
-}
-.blog-description {
-  font-size: 20px;
-  color: #999;
-}
+
 
 /*
  * Header
@@ -113,70 +106,67 @@ h6, .h6 {
     margin-left: -40px;
 }
 
-
-/*
- * Main column and sidebar layout
- */
-.container {
-    width: 980px;
-}
-.col-sm-8{
-	width: 100%;
-}
-.blog-main {
-  font-size: 18px;
-  line-height: 1.5;
-}
+/*内容*/
 .breadcrumb{
 	background-color: #fff;
 	padding: 20px 0 0 0;
 }
-/* Sidebar modules for boxing content */
-.sidebar-module {
-  padding: 15px;
-  margin: 0 -15px 15px;
+.container .abstract1{
+	height: 370px;
+	border-bottom:1px solid rgb(217,217,217) ;
 }
-.sidebar-module-inset {
-  padding: 15px;
-  background-color: #f5f5f5;
-  border-radius: 4px;
+.container small{
+	color: #000000;
 }
-.sidebar-module-inset p:last-child,
-.sidebar-module-inset ul:last-child,
-.sidebar-module-inset ol:last-child {
-  margin-bottom: 0;
+.abstract1 img{
+	margin: 65px 0 0 70px;
+	width: 360;
+	height: 225px;
 }
 
-
-/* Pagination */
-.pager {
-  margin-bottom: 60px;
-  text-align: left;
-}
-.pager > li > a {
-  width: 140px;
-  padding: 10px 20px;
-  text-align: center;
-  border-radius: 30px;
+.abstract1 .description1{
+	position: relative;
+	width: 490px;
+    top: -150px;
+    left: 465px;
+    color: rgb(142,142,142);
 }
 
-
-/*
- * Blog posts
- */
-
-.blog-post {
-  margin-bottom: 60px;
+.container .abstract2{
+	height: 370px;
+	border-bottom:1px solid rgb(217,217,217) ;
 }
-.blog-post-title {
-  margin-bottom: 5px;
-  font-size: 40px;
-}
-.blog-post-meta {
-  margin-bottom: 20px;
-  color: #999;
+.abstract2 img{
+	margin: -15px 0 0 600px;
+	width: 360;
+	height: 225px;
 }
 
+.abstract2 .description2{
+	position: relative;
+	width: 490px;
+    top: 140px;
+    left: 60px;
+    color: rgb(142,142,142);
+}
+
+.container .abstract3{
+	height: 370px;
+	border-bottom:1px solid rgb(217,217,217) ;
+}
+.abstract3 img{
+	margin: 50px 0 0 600px;
+	width: 360;
+	height: 225px;
+}
+
+.abstract3 .description3{
+	position: relative;
+	width: 490px;
+    top: -160px;
+    left: 40px;
+    color: rgb(142,142,142);
+}
 
 /*
  * Footer
@@ -193,5 +183,26 @@ h6, .h6 {
     
 }
 .blog-footer p:last-child {
-  margin-bottom: 0;
+    margin-bottom: 0;
+    margin: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

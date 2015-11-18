@@ -18,32 +18,76 @@
         <div class="head">
             <div class="head-brand"></div>
             <ul class="nav head-nav">
-                <li><a href="/">首页</a></li>
-                <li><a href="/api">文档</a></li>
-                <li class="active"><a href="#">演示</a></li>
-                <li><a href="/demovv">viva入口</a></li>
-                <li><a href="http://autobot.acnlp.com:3000">AutoBot</a></li>
+                <li><img src="/images/home.png" class="head_nav_img"><a href="/">首页</a></li>
+                <li><img src="/images/product.png" class="head_nav_img"><a href="/product">产品</a></li>
+                <li><img src="/images/title.png" class="head_nav_img"><a href="/api">文档</a></li>
+                <li class="active"><img src="/images/demo-click.png" class="head_nav_img"><a href="/demo">演示</a></li>
+                <li><img src="/images/robot.png" class="head_nav_img"><a href="http://autobot.acnlp.com:3000">智能对话</a></li>
+                <li><img src="/images/about.png" class="head_nav_img"><a href="/about">关于</a></li>
             </ul>
         </div>
     </div>
     <!--容器-->
     <div class="container">
+    	<ol class="breadcrumb">
+		  <li>您现在的位置:  &nbsp;<a href="/">首页</a></li>
+		  <li class="active">演示</li>
+		</ol>
         <!--提交区-->
         <div class="submit_area">
             <textarea class="textarea"></textarea>
             <div class="btn btn-danger danger_btn">清除</div>
             <div class="btn btn-primary submit_btn">提交</div>
         </div>
+        
+        <div class="analysis-title">
+		  	<img src="/images/font-1.jpg" style="position: relative;left:50px; top: 17px;"/>
+		  	<hr style="margin: 3px 0 0 0;"/>
+		</div>
+        
         <!--分析区-->
         <div class="analysis">
             <div class="analysis_nav">
-                <div class="l1">ACNLP解析结果</div>
-                <div class="l2 clicked">精确分词</div>
-                <div class="l2">搜索引擎分词</div>
-                <div class="l2">关键词提取</div>
-                <div class="l2">词性标记</div>
-                <div class="l2">情感分析</div>
-                <div class="l2">相似性</div>
+                <!--<div class="l2 ">
+                	<i class="string-icon0"></i>
+                	<p class="match_string">精确分词</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
+                <div class="l2 clicked">
+                	<i class="string-icon1"></i>
+                	<p class="match_string">搜索引擎分词</p>
+             		<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>-->
+                <div class="l2">
+                	<i class="string-icon2"></i>
+                	<p class="match_string">关键词提取</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
+                <div class="l2">
+                	<i class="string-icon3"></i>
+                	<p class="match_string">词性标记</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
+                <div class="l2">
+                	<i class="string-icon4"></i>
+                	<p class="match_string">情感分析</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
+                <div class="l2">
+                	<i class="string-icon5"></i>
+                	<p class="match_string">相似性推荐</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
+                <div class="l2">
+                	<i class="string-icon6"></i>
+                	<p class="match_string">自动文摘</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
+                <div class="l2">
+                	<i class="string-icon7"></i>
+                	<p class="match_string">自动文章分类</p>
+                	<span class="glyphicon glyphicon-triangle-right" aria-hidden="true"></span>
+                </div>
             </div>
             <div class="analysis_result_border">
                 <div class="analysis_result"></div>
@@ -52,8 +96,7 @@
     </div>
     <!--页脚-->
     <div class="blog-footer">
-        <p>ACNLP by 49 Team</p>
-        <p><a href="#">置顶</a></p>
+        <p>ACNLP</p>
     </div>
 </body>
 <script>
@@ -61,30 +104,40 @@
 
         'user strict';
 
+        var data = 'dd';
+
         // ajax字典
         var methodDict = {
-            '精确分词': '/exactCut/',
-            '搜索引擎分词': '/searchCut/',
+//          '精确分词': '/exactCut/',
+//          '搜索引擎分词': '/searchCut/',
             '关键词提取': '/kwAnalyse/',
             '词性标记': '/wordFlag/',
             '情感分析': '/sentiments/',
-            '相似性': '/similar/',
+            '相似性推荐': '/similar/',
+            '自动文摘': '/abstract/',
+            '自动文章分类': '/classification/'
         };
-
         // 回调字典
         var processDict = {
-            '/exactCut/': exactCutResult,
-            '/searchCut/': searchCutResult,
+//          '/exactCut/': exactCutResult,
+//          '/searchCut/': searchCutResult,
             '/kwAnalyse/': kwAnalyseResult,
             '/wordFlag/': wordFlagResult,
-            '/sentiments/': sentimentsResult
+            '/sentiments/': sentimentsResult,
+            '/abstract/':abstractResult,
+            '/classification/':classificationResult
         };
 
         // 提交按钮点击事件
         $('.submit_btn').click(function () {
             $('.analysis_nav .clicked').removeClass('clicked');
             $('.analysis_nav .l2').first().addClass('clicked');
-            $.get('/exactCut/' + $('.textarea').val(), exactCutResult);
+            $.post('/kwAnalyse/',{nl: $('.textarea').val()}, kwAnalyseResult);
+        });
+
+        //清除按钮点击事件
+        $('.danger_btn').click(function () {
+            $('.textarea').val('');
         });
 
         // 导航切换触发点击事件
@@ -94,34 +147,49 @@
             // user input
             var value = $('.textarea').val();
             // key of methodDict
-            var now = $('.analysis_nav .clicked').text();
+            var now = $('.clicked .match_string').text();
             // method for ajax call
             var method = methodDict[now] || 'exactCut';
+            
             // method for process result
             var process = processDict[method];
-            if (now == '相似性') {
+            if (now == '相似性推荐') {
                 var analysisResult = $('.analysis_result');
                 analysisResult.text('');
-                analysisResult.append('<div class="check_similar">点击查看相似性</div><div class="itemS"><span class="span1">文档排行</span><span class="span2">相似性</span></div>');
+                analysisResult.append('<p class="p1">相似性推荐:</p><p class="check_similar1">点击查看相似性</p>');
             } else {
                 // ajax call
-                $.get(method + value, process);
+//              $.get(method + value, process);
+                $.post(method, {nl:value},process,"json");
             }
         });
 
         // 相似性分析
-        $('.analysis_result').on('click', '.check_similar', function () {
-            if ($('.check_similar').text() == '查询很漫长,请等候...') return false;
-            $('.check_similar').text('查询很漫长,请等候...');
+        $('.analysis_result').on('click', '.check_similar1', function () {
+            if ($('.check_similar1').text() == '查询很漫长,请等候...') return false;
+            $('.check_similar1').text('查询很漫长,请等候...');
             var value = $('.textarea').val();
-            $.get('/similar/' + value, similarResult);
+            $.post('/similar/', {nl:value},similarResult);
+//            $.get('/similar/' + value, similarResult);
         });
 
         // 相似文章展示
-        $('.analysis_result').on('click', '.item .simiNO', function () {
-            $.get('/atc/' + $(this).text(), function(data) {
-                alert(data.data);
-            });
+        $('.analysis_result').on('click', '.item .simiNO',function () {
+
+			if($(this).parent().next("p").is(":visible")){
+				$(this).parent().next("p").hide(500);
+				$(this).children("span").attr("class","glyphicon glyphicon-menu-down");	
+//				$(this).parent().next("p").text(data.data);
+			}else{
+				$(this).parent().next("p").show(500);
+				$(this).children("span").attr("class","glyphicon glyphicon-menu-up");
+                var oP = $(this).parent().next("p");
+
+                $.get('/atc/' + $(this).next().text() + '_' + $(this).text(), function(data) {
+                    oP.text(data.data);
+
+                });
+			}
         });
 
         // 初始化页面
@@ -131,32 +199,33 @@
         Highcharts.setOptions({ global: { useUTC: false } });
 
         // 精确分词-回调
-        function exactCutResult(result) {
-            var analysisResult = $('.analysis_result');
-            analysisResult.text('');
-            for (var i = 0, k = result.wordsList.length - 1; i < k; i+=1) {
-                analysisResult.append(result.wordsList[i] + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
-            }
-            analysisResult.append(result.wordsList[k]);
-        };
-
-        // 搜索引擎分词-回调
-        function searchCutResult(result) {
-            var analysisResult = $('.analysis_result');
-            analysisResult.text('');
-            for (var i = 0, k = result.wordsList.length - 1; i < k; i+=1) {
-                analysisResult.append(result.wordsList[i] + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
-            }
-            analysisResult.append(result.wordsList[k]);
-        };
+//      function exactCutResult(result) {
+//          var analysisResult = $('.analysis_result');
+//          analysisResult.text('');
+//          for (var i = 0, k = result.wordsList.length - 1; i < k; i+=1) {
+//              analysisResult.append(result.wordsList[i] + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
+//          }
+//          analysisResult.append(result.wordsList[k]);
+//      };
+//
+//      // 搜索引擎分词-回调
+//      function searchCutResult(result) {
+//          var analysisResult = $('.analysis_result');
+//          analysisResult.text('');
+//          for (var i = 0, k = result.wordsList.length - 1; i < k; i+=1) {
+//              analysisResult.append(result.wordsList[i] + '&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;');
+//          }
+//          analysisResult.append(result.wordsList[k]);
+//      };
 
         // 关键词提取-回调
         function kwAnalyseResult(result) {
             var analysisResult = $('.analysis_result');
             analysisResult.text('');
-            analysisResult.append('<div class="itemS"><span class="span1">关键词</span><span class="span2">权重</span></div>');
+            analysisResult.append('<p class="p1">关键词提取:</p>');
+            analysisResult.append('<div class="itemS" style="background-color: rgb(94,164,223);"><span class="titleSpan">关键词</span><span class="titleSpan">权重</span></div>');
             for (var i = 0, k = result.rankList.length; i < k; i+=1) {
-                var item = $('<div class="item"><span>' + result.rankList[i]['word'] + '</span><span>' + result.rankList[i]['weight'] + '</span></div>');
+                var item = $('<div class="item" style="border-right:2px solid rgb(224,231,237);"><span class="Span">' + result.rankList[i]['word'] + '</span><span class="Span">' + result.rankList[i]['weight'] + '</span></div>');
                 item.appendTo(analysisResult);
             }
         };
@@ -165,11 +234,102 @@
         function wordFlagResult(result) {
             var analysisResult = $('.analysis_result');
             analysisResult.text('');
-            analysisResult.append('<div class="itemS"><span class="span1">分词</span><span class="span2">词性</span></div>');
+            var flag = $('<div class="flag"><p class="p2">词性标记:</p></div>');
+            var classify = $('<div class="classify"><p class="p2">词性分类:</p><span class="a">专有名词<i>0</i></span><span class="b">名词<i>0</i></span><span class="c">时间词<i>0</i></span><span class="d">标点符号<i>0</i></span><span class="e">介词<i>0</i></span><span class="f">数词<i>0</i></span><span class="g">副词<i>0</i></span><span class="h">量词<i>0</i></span><span class="j">动词<i>0</i></span><span class="k">网页链接<i>0</i></span><span class="l">连词<i>0</i></span><span class="m">助词<i>0</i></span><span class="n">方位词<i>0</i></span><span class="o">语气词<i>0</i></span><span class="p">字符串<i>0</i></span><span class="q">形容词<i>0</i></span><span class="r">代词<i>0</i></span><span class="s">地名<i>0</i></span></div>');
+            flag.appendTo(analysisResult);
+            classify.appendTo(analysisResult);
+            
             for (var i = 0, k = result.flagsList.length; i < k; i+=1) {
-                var item = $('<div class="item"><span>' + result.flagsList[i]['word'] + '</span><span>' + result.flagsList[i]['flag'] + '</span></div>');
-                item.appendTo(analysisResult);
+            	if(result.flagsList[i]['flag'] == "nt"){
+            		var item = $('<span class="a">' + result.flagsList[i]['word'] + '</span>');
+    				Length($(".classify .a"));
+            	}else if(result.flagsList[i]['flag'] == "n"){
+            		var item = $('<span class="b">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .b"));
+            	}else if(result.flagsList[i]['flag'] == "t"){
+            		var item = $('<span class="c">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .c"));
+            	}else if(result.flagsList[i]['flag'] == "x"){
+            		var item = $('<span class="d">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .d"));
+            	}else if(result.flagsList[i]['flag'] == "p"){
+            		var item = $('<span class="e">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .e"));
+            	}else if(result.flagsList[i]['flag'] == "d"){
+            		var item = $('<span class="f">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .f"));
+            	}else if(result.flagsList[i]['flag'] == "d"){
+            		var item = $('<span class="g">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .g"));
+            	}else if(result.flagsList[i]['flag'] == "m"){
+            		var item = $('<span class="h">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .h"));
+            	}else if(result.flagsList[i]['flag'] == "v"){
+            		var item = $('<span class="j">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .j"));
+            	}else if(result.flagsList[i]['flag'] == "wanyelianjie"){
+            		var item = $('<span class="k">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .k"));
+            	}else if(result.flagsList[i]['flag'] == "c"){
+            		var item = $('<span class="l">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .l"));
+            	}else if(result.flagsList[i]['flag'] == "u"){
+            		var item = $('<span class="m">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .m"));
+            	}else if(result.flagsList[i]['flag'] == "f"){
+            		var item = $('<span class="n">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .n"));
+            	}else if(result.flagsList[i]['flag'] == "y"){
+            		var item = $('<span class="o">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .o"));
+            	}else if(result.flagsList[i]['flag'] == "zifuchuan"){
+            		var item = $('<span class="p">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .p"));
+            	}else if(result.flagsList[i]['flag'] == "a"){
+            		var item = $('<span class="q">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .q"));
+            	}else if(result.flagsList[i]['flag'] == "r"){
+            		var item = $('<span class="r">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .r"));
+            	}else if(result.flagsList[i]['flag'] == "ns"){
+            		var item = $('<span class="s">' + result.flagsList[i]['word'] + '</span>');
+            		Length($(".classify .ns"));
+            	}else{
+            		var item = $('<span>' + result.flagsList[i]['word'] + '</span>');
+            		console.log(1);
+            	}
+                
+                item.appendTo(flag);
             }
+            var classifyI = document.getElementsByClassName("classify")[0].getElementsByTagName("i");
+            for(var i = 0,len = classifyI.length;i < len;i++){
+                if(classifyI[i].firstChild.nodeValue == "0"){
+                    classifyI[i].parentNode.style.display = "none";
+                }
+            }
+            //点击词性类别让其对应的分词显示，其他分词变灰
+            var classifyDiv = document.getElementsByClassName("classify")[0];
+            var flagDiv = document.getElementsByClassName("flag")[0];
+            var flagSpan = flagDiv.getElementsByTagName("span");
+			    classifyDiv.addEventListener("click",function(e){
+			    	if(e.target.tagName == "SPAN"&&parseInt(e.target.firstElementChild.firstChild.nodeValue) > 0){
+			    		for(var i = 0,len = flagSpan.length;i<len;i++){
+			    			if(flagSpan[i].className != e.target.className){
+			    				flagSpan[i].style.backgroundColor = "#999999";
+			    			}else{
+			    				flagSpan[i].style.backgroundColor = e.target.style.backgroundColor;
+			    			}
+			    		}
+			    	}else if(e.target.tagName == "I"&&parseInt(e.target.firstChild.nodeValue) > 0){
+			    		for(var i = 0,len = flagSpan.length;i<len;i++){
+			    			if(flagSpan[i].className != e.target.parentNode.className){
+			    				flagSpan[i].style.backgroundColor = "#999999";
+			    			}else{
+			    				flagSpan[i].style.backgroundColor = e.target.parentNode.style.backgroundColor;
+			    			}
+			    		}
+			    	}
+			    },false);
         };
 
         // 情感分析-回调
@@ -180,7 +340,8 @@
                 chart: {
                     backgroundColor: '#f6f6f6',
                     renderTo: 'container',
-                    type: 'pie'
+                    type: 'pie',
+                    width: '700'
                 },
                 title: {
                     text: '情感分析(左为基于机器学习：样本过少准确度有待提高，右为基于句法分析)'
@@ -190,7 +351,7 @@
                 },
                 plotOptions: {
                     pie: {
-                        size:'100%',
+                        size:'90%',
                         allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: { enabled: true, color: '#000000', connectorColor: '#000000', format: '<b>{point.name}</b>: {point.percentage:.1f} %' },
@@ -215,13 +376,180 @@
         // 相似性-回调
         function similarResult(result) {
             var analysisResult = $('.analysis_result');
-            $('.check_similar').text('点击查看相似性');
-            for (var i = 0, k = result.similarNO.length; i < k; i+=1) {
-                var item = $('<div class="item"><span class="simiNO">' + parseInt(result.similarNO[i]) + '</span><span>' + result.similarQZ[i] + '</span></div>');
+            analysisResult.text('');
+            analysisResult.append('<p class="p1">相似性推荐:</p><p class="check_similar1">点击查看相似性</p>');
+            analysisResult.append('<div class="itemS"style="background-color: rgb(94,164,223);"><span class="span1">文件名</span><span class="span2">文档排行</span><span class="span3">相似性权重</span></div>');
+            $('.check_similar1').text('点击查看相似性');
+            for (var i = 0; i < result.similarNO.length; i+=1) {
+                var similar = result.similarNO[i].split("_");
+                var item = $('<div class="item"><span class="simiNO">'+similar[1]+'<span class="glyphicon glyphicon-menu-down" style="border: none;" aria-hidden="true"></span></span><span class= "itemSpan1">' + similar[0] + '</span><span class="itemSpan2">' + result.similarQZ[i] + '</span></div><p class="article"></p>');
                 analysisResult.append(item);
+                
             }
-        };
+        }
+		//自动文摘-回调
+//		function abstractResult(result){
+//			var analysisResult = $('.analysis_result');
+//            analysisResult.text('');
+//            analysisResult.append('<p class="p1">自动文摘:</p><div class="abstract"><span>'+result.text+'</div>');
+//		}
 
+        //自动文摘-回调
+        function abstractResult(result){
+            var analysisResult = $('.analysis_result');
+            analysisResult.text('');
+//            var str = "掌柜人不错，质量很好，下次再来1。掌柜人不错，质量很好，下次再来2。掌柜人不错，质量很好，下次再来3。掌柜人不错，质量很好，下次再来4。掌柜人不错，质量很好，下次再来5。掌柜人不错，质量很好，下次再来6。";
+//            var highLight = ["掌柜人不错，质量很好，下次再来1"];
+            var strAry = $('.textarea').val().split("。");
+            var re = '';
+            var sign = 0;
+            if (strAry.length>=1) {
+                for (var i = 0, len = strAry.length-1; i < len; i++) {
+                    for (var k = 0; k < result.text.length; k++) {
+                        if (strAry[i] + '。' == result.text[k]) {
+                            var highLightStr = '<span style="color:red">' + strAry[i] +"。"+ '</span>';
+                            break;
+                        }
+                        else {
+                            sign++;
+                        }
+                        if (sign == result.text.length) {
+                            var highLightStr = '<span style="color:gray">' + strAry[i] + "。"+'</span>';
+                        }
+//                    if (!re.match(highLightStr)) re = re + highLightStr+"。";
+                    }
+                    re = re + highLightStr ;
+                    sign = 0;
+
+                }
+            }
+            console.log(strAry);
+            analysisResult.append('<p class="p1" style="width: 100%;">自动文摘:</p><div class="abstract"><span style="padding: 10px 30px 0 30px ;display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'+ re + '</div>');
+        }
+
+
+        //自动文章分类-回调
+        function classificationResult(result){
+            var analysisResult = $('.analysis_result');
+            analysisResult.text('');
+
+            var obj = {"topic1":null,"topic2":null,"topic3":null};
+            for(var i=0;i<result.classification.length;i++){
+
+                obj["topic"+(i+1)] = result.classification[i];
+            }
+
+            analysisResult.append('<p class="p1">自动文章分类:<span style="color:#d43f3a;">'+ result.classification.join('-') +'</span></p><div class="wrapper" id="wrapper"></div>');
+            var classification = ["新闻","国内新闻"]
+            var wrapper = $('#wrapper');
+            var warp1 = $('<div class="wrap1"><ul class="one"><li><span class="first">汽车</span></li><li><span class="first">游戏</span></li><li><span class="first">体育</span></li><li><span class="first">教育</span></li><li><span class="first">财经</span></li><li><span class="first">新闻</span></li><li><span class="first">军事</span></li><li><span class="first">娱乐</span></li>	<li><span class="first">时尚</span></li><li><span class="first">科技</span></li><li><span class="first">互联网</span></li>	<li><span class="first">房产</span></li></ul></div>');
+            var warp2 = $('<div class="warp2"><ul class="two"><li><span class="second">汽车</span></li><li><span class="second">游戏</span></li><li><span class="second">体育</span></li><li><span class="second">教育</span></li><li><span class="second">财经</span></li><li><span class="second">新闻</span></li><li><span class="second">军事</span></li><li><span class="second">娱乐</span></li>	<li><span class="second">时尚</span></li><li><span class="second">科技</span></li><li><span class="second">互联网</span></li>	<li><span class="second">房产</span></li></ul></div>')
+            var warp3 = $('<div class="warp3"><ul class="three"><li><span class="third">CBA</span></li><li><span class="third">NBA</span></li><li><span class="third">季后赛</span></li><li><span class="third">总冠军</span></li><li><span class="third">CBA</span></li><li><span class="third">NBA</span></li><li><span class="third">季后赛</span></li><li><span class="third">总冠军</span></li><li><span class="third">CBA</span></li><li><span class="third">NBA</span></li><li><span class="third">季后赛</span></li><li><span class="third">总冠军</span></li></ul></div>');
+            var space = $('<div class="space"></div>');
+            warp1.appendTo(wrapper);
+            warp2.appendTo(wrapper);
+            warp3.appendTo(wrapper);
+            space.appendTo(wrapper);
+//            var obj = {
+//                "topic1":"体育",
+//                "topic2":"国内蓝球",
+//                "topic3":"CBA",
+//
+//            };
+
+            function findCategory(res){
+                var allCategory = {
+                    '科技': ['互联网', '笔记本', '机器人', '智能硬件', '相机', '平板', '家电', '创业', '手机', '苹果', '电信'],
+                    '财经': ['债券', '贵金属', '理财', '产经', '外汇', '保险', 'P2P', '博客', '消费', '证券', '信托', '银行'],
+                    '国内新闻': ['港澳台新闻'],
+                    '国内足球': ['中甲', '中超', '亚冠', '国青', '女足', '国家队'],
+                    '国际新闻': ['美洲', '欧洲', '亚洲'],
+                    '汽车': ['海外', '国内', '购车', '专栏'],
+                    '新闻': ['国内新闻', '媒体', '新观察', '会议', '国际新闻', '航空', '天气', '深度报道', '社会万象'],
+                    '军事': ['深度', '军事历史', '大国博弈', '中国军情'],
+                    '娱乐': ['综艺', '明星', '演出', '评论', '八卦', '音乐', '电影', '电视'],
+                    '国内篮球': ['女篮', 'CBA', '男篮'],
+                    '中国军情': ['东海局势', '南海局势'],
+                    '篮球-NBA': ['洛杉矶湖人', '达拉斯小牛'],
+                    '排球': ['女排', '男排'],
+                    '证券': ['股票', '港股', '期货', '新股', '新三板', '券商', '美股', '基金'],
+                    '时尚': ['性爱', '美容', '专栏', '时装', '美体', '婚嫁', '尚品'],
+                    '教育': ['考研', '雅思', '中考', '托福', '中小学教育', '少儿英语', '四六级', '会计', '司法考试', '高考', '公务员考试', 'SAT', '国际学校', '移民资讯', '留学出国'],
+                    '游泳': ['国内'],
+                    '国际足球': ['美洲', '德甲', '西甲', '英超', '意甲', '女足'],
+                    '跳水': ['国内'],
+                    '体育': ['游泳', '棋牌', '田径', '高尔夫', '国内足球', '乒乓球', '国际篮球', '马术', '国内蓝球', '羽毛球', '篮球-NBA', '冰雪', '体操', '跳水', '射击', '国际足球', '台球', '排球', '搏击'],
+                    '留学出国': ['留学资讯', '海归就业', '签证申请', '海外视角']};
+                var layer1 = res.topic1;
+                var item2 = res.topic2;
+                var item3 = res.topic3;
+                var layer2 = allCategory[res.topic1];
+                if(layer2.length > 12){
+                    var layer2Tmp = [];
+                    var flag = 0;
+                    for(var k=0;k<11;k++){
+                        if(layer2[k] == item2){
+                            flag = 1;
+                        }
+                        layer2Tmp.push(layer2[k])
+                    }
+                    if(flag === 0){
+                        layer2Tmp.push(item2)
+                    }
+                    else{
+                        layer2Tmp.push(layer2[11])
+                    }
+                    layer2 = layer2Tmp;
+                }
+                var layer3 = [];
+
+                var warp1Li = document.getElementsByClassName("one")[0].getElementsByTagName("li");
+                for(var i = 0,len = warp1Li.length;i < len;i++){
+                    if(warp1Li[i].firstChild.firstChild.nodeValue == layer1){
+                        warp1Li[i].style.backgroundColor = "#d43f3a";
+                    }
+
+                }
+
+                if(allCategory[res.topic2]){
+                    layer3 = allCategory[res.topic2];
+                }
+                console.log(layer2);
+                var warp2Li = document.getElementsByClassName("two")[0].getElementsByTagName("li");
+                for(var i = 0,len = layer2.length;i < len;i++){
+                    warp2Li[i].firstChild.innerHTML = layer2[i];
+                    warp2Li[i].style.display = "block";
+                    if(warp2Li[i].firstChild.firstChild.nodeValue == item2){
+
+                        warp2Li[i].style.backgroundColor = "#d43f3a";
+                    }
+                }
+
+
+                if(layer3){  // 如果有第三层则处理第三层
+                    var warp3Li = document.getElementsByClassName("three")[0].getElementsByTagName("li");
+                    for(var i = 0,len = layer3.length;i < len;i++){
+                        warp3Li[i].firstChild.innerHTML = layer3[i];
+                        warp3Li[i].style.display = "block";
+                        if(warp3Li[i].firstChild.firstChild.nodeValue == item3  && item3){
+                            warp3Li[i].style.backgroundColor = "#d43f3a";
+                        }
+                    }
+                    console.log(layer3);
+                }
+            }
+            findCategory(obj) ;
+        }
+
+
+		//每种分词的个数
+		function Length(span){
+			var length = span.children("i").text()
+    		length = parseInt(length) + 1;
+    		span.children("i").text(length);
+		}
+		
     });
+    
 </script>
 </html>

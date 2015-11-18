@@ -2,3 +2,9 @@
 程序由两部分组成
 nodejs负责路由分发请求
 python负责具体的自然语言处理
+
+start.js  port=80
+config.js  redisServer : '211.155.92.85'
+nlp_router.js
+//ubuntu
+var articleDir = '/home/workspace/news/';

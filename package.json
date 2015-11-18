@@ -6,6 +6,7 @@
     "start": "node ./bin/start"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
     "debug": "*",
     "ejs": "*",
     "express": "*",

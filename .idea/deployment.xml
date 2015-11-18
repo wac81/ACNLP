@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData">
+  <component name="PublishConfigData" serverName="211.155.92.85">
     <serverData>
-      <paths name="ACNLP">
+      <paths name="211.155.92.85">
         <serverdata>
           <mappings>
-            <mapping deploy="/AC-nlp" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

@@ -16,18 +16,24 @@
         <div class="head-wrap">
             <div class="head">
                 <div class="head-brand"></div>
-                <ul class="nav head-nav">
-                    <li><a href="/">首页</a></li>
-                    <li class="active"><a href="#">文档</a></li>
-                    <li><a href="/demo">演示</a></li>
-                    <li><a href="/demovv">viva入口</a></li>
-                    <li><a href="http://autobot.acnlp.com:3000">AutoBot</a></li>
-                </ul>
+		        <ul class="nav head-nav">
+                    <li><img src="/images/home.png" class="head_nav_img"><a href="/">首页</a></li>
+                    <li><img src="/images/product.png"class="head_nav_img"><a href="/product">产品</a></li>
+                    <li class="active"><img src="/images/title-click.png" class="head_nav_img"><a href="/api">文档</a></li>
+
+                    <li><img src="/images/demo.png" class="head_nav_img"><a href="/demo">演示</a></li>
+                    <li><img src="/images/robot.png" class="head_nav_img"><a href="http://autobot.acnlp.com:3000">智能对话</a></li>
+                    <li><img src="/images/about.png" class="head_nav_img"><a href="/about">关于</a></li>
+
+		        </ul>
             </div>
         </div>
 
         <div class="container">
-
+			<ol class="breadcrumb">
+			    <li>您现在的位置:  &nbsp;<a href="/">首页</a></li>
+			    <li class="active">文档</li>
+			</ol>
             <div class="blog-header">
                 <h1 class="blog-title">ACNLP 接口文档</h1>
                 <p class="lead blog-description"></p>
@@ -35,6 +41,7 @@
 
             <div class="row">
                 <div class="col-sm-8 blog-main">
+                	
                     <div class="blog-post">
                         <h2>简介</h2>
                         <p>ACNLP是一个用于解析中文自然语义的开放接口，提供分词、词性标记、关键词提取、语句情感分析等处理能力。</p>
@@ -117,8 +124,7 @@
         </div>
 
         <div class="blog-footer">
-            <p>ACNLP by 49 Team</p>
-            <p><a href="#">置顶</a></p>
+            <p>ACNLP</p>
         </div>
     </body>
 </html>

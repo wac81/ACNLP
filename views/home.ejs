@@ -7,37 +7,68 @@
     <title>ACNLP</title>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <link type="text/css" href="/stylesheets/home.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/stylesheets/ddfullscreenslider.css"/>
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="/javascripts/jquery.mousewheel.min.js" type="text/javascript" charset="utf-8"></script>
+    <script src="/javascripts/ddfullscreenslider.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body>
-    <!-- 页眉 -->
-    <div class="head-wrap">
-        <div class="head">
-            <div class="head-brand"></div>
-            <ul class="nav head-nav">
-                <li class="active"><a href="#">首页</a></li>
-                <li><a href="/api">文档</a></li>
-                <li><a href="/demo">演示</a></li>
-                <li><a href="/demovv">viva入口</a></li>
-                <li><a href="http://autobot.acnlp.com:3000">AutoBot</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!--中部-->
-    <div class="content">
-        <div class="middle">
-            <input type="text" class="parseInput form-control" placeholder="说点什么吧">
-            <div class="parseSubmit btn btn-primary">解析</div>
-        </div>
-    </div>
-
-    <!-- 页脚 -->
-    <div class="foot">
-        <p>ACNLP by 49 Team</p>
-    </div>
+	<section id="dowebok" class="dd_fullscreenslider">
+		<div class="head-wrap">
+			        <div class="head">
+			            <div class="head-brand"></div>
+			            <ul class="nav head-nav">
+			                <li class="active"><img src="/images/home-click.png" class="head_nav_img"><a href="#">首页</a></li>
+			                <li><img src="/images/product.png" class="head_nav_img"><a href="/product">产品</a></li>
+			                <li><img src="/images/title.png" class="head_nav_img"><a href="/api">文档</a></li>
+			                <li><img src="/images/demo.png" class="head_nav_img"><a href="/demo">演示</a></li>
+			                <li><img src="/images/robot.png" class="head_nav_img"><a href="http://autobot.acnlp.com:3000">智能对话</a></li>
+			                <li><img src="/images/about.png" class="head_nav_img"><a href="/about">关于</a></li>
+			            </ul>
+			        </div>
+			    </div>			    
+		<div class="slidewrapper">
+		    <!-- 页眉 -->
+		    <article class="slide">	
+			
+			    <!--中部-->
+			    <div class="content">
+			    	<img src="/images/font.png"/ class="content_img">
+			        <div class="middle">
+			            <input type="text" class="parseInput form-control" placeholder="请输入你要解析的内容">
+			            <div class="parseSubmit btn btn-primary">解析</div>
+			        </div>
+			    </div>
+			
+			    <!-- 页脚 -->
+			    <div class="foot">
+			        <p>ACNLP</p>
+			    </div>
+		    </article>
+		    <article class="slide">
+		    	<!-- 页眉 -->
+			        <div class="head" style="width: 100%;height: 50px;">
+			           
+			        </div>  
+		    	<div class="content">
+		        	<ul class="content_ul">
+		        		<li><img src="/images/1.png"><br /><span>核心技术</span><p>专注中文语义分析技术，拥有丰富的经验积累。自主研发千万级中文语料库，为精准和深度的中文语义分析提供坚实基础。</p></li>
+		        		<li><img src="/images/2.png"><br /><span>应有尽有</span><p>一站式解决您的中文语义分析需求。多个语义分析API，从情感倾向、实体、分类、聚类等多种维度助您分析海量非结构化文本，最大化数据</p></li>
+		        		<li><img src="/images/3.png"><br /><span>30秒可用</span><p>开放中文语义API，快速注册，立即使用。</p></li>
+		        		<li><img src="/images/4.png"><br /><span>行业领先</span><p>强大的半监督机器学习引擎，结合独特的语义联想、句法分析等技术，将中文语义分析的准确度提升到商业应用级别。</p></li>
+		        		<li><img src="/images/5.png"><br /><span>交互定制</span><p>可定制数据分析模型和解决方案，针对需求提供分类、消岐、典型意见提取等定制机器学习模型的建立和API服务。</p></li>
+		        		<li><img src="/images/6.png"><br /><span>企业应用</span><p>成功为商业用户提供每日千万次API调用服务，付费用户不限次技术支持，稳定性和处理能力有可靠保证。</p></li>
+		        	</ul>
+		        </div>
+				<div class="foot">
+			        <p>ACNLP</p>
+			    </div>	
+			    
+			</article>
+	    </div>
+    </section>
 </body>
 <script>
     $(document).ready(function() {
@@ -45,15 +76,22 @@
         $('.parseInput').focus();
         $('.parseInput').keydown(function(event) {
             if(event.keyCode == 13) {
-                location.href = '/demo' // /' + $(this).val();
+//				$.post('/demo/', {nl:value},similarResult);
+                location.href = '/demo/' + $(this).val();
                 $(this).val('');
             }
         });
         $('.parseSubmit').click(function () {
             var input = $('.parseInput').val();
-            location.href = '/demo' // /' + input;
+            location.href = '/demo/' + input;
             $(this).val('');
         });
     });
+    var fss;
+	$(function() {
+		fss = new ddfullscreenslider({
+			sliderid: 'dowebok'
+		});
+	});
 </script>
 </html>
