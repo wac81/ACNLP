@@ -39,11 +39,8 @@
             <div class="btn btn-danger danger_btn">清除</div>
             <div class="btn btn-primary submit_btn">提交</div>
         </div>
-        
-        <div class="analysis-title">
-		  	<img src="/images/font-1.jpg" style="position: relative;left:50px; top: 17px;"/>
-		  	<hr style="margin: 3px 0 0 0;"/>
-		</div>
+        <h3 style="color:rgb(85,85,85); background-color:#fff ; position: relative; border-bottom: 1px solid rgb(223,223,223);height: 12px;margin-top: 35px;">
+            <span style="position: absolute; background-color: #fff;left: 30px; padding: 0 10px 0 10px;">ACNLP解析结果</span></h3>
         
         <!--分析区-->
         <div class="analysis">
@@ -526,7 +523,7 @@
                 }
 
 
-                if(layer3){  // 如果有第三层则处理第三层
+                if(item3){  // 如果有第三层则处理第三层
                     var warp3Li = document.getElementsByClassName("three")[0].getElementsByTagName("li");
                     for(var i = 0,len = layer3.length;i < len;i++){
                         warp3Li[i].firstChild.innerHTML = layer3[i];
